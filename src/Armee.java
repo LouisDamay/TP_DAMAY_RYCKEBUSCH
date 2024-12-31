@@ -6,6 +6,7 @@ public class Armee{
 	String nom;
 	String faction;
 	int pts_max;
+	
 	static java.util.Scanner sc = new java.util.Scanner(System.in);
 	
     public Armee(){
@@ -54,18 +55,18 @@ public class Armee{
 		this.pts_max = res;
 
 		System.out.println("  Armée crée avec succès !\n  Appuyez sur entrée pour revenir au menu principal.");
-		sc.nextLine();
+		sc.nextLine(); sc.nextLine();
     }
 
-    public Armee(String nom,String faction,int pts_max) {
+    // Pour le debug
+    public Armee(String nom, String faction, int pts_max) {
     	this.nom = nom;
     	this.faction = faction;
     	this.pts_max = pts_max;
     }
     
-	// Ajouter des groupes d'unités
-    Runnable ajouterGroupeUnite = () -> {
-        System.out.println("Ajout d'un groupe d'unité. A faire.");
-    };
+	public String getNom() {
+		return this.nom;
+	}
 	
 }
