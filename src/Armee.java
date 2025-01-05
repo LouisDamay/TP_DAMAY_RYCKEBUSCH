@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class Armee{
 	
@@ -6,8 +8,12 @@ public class Armee{
 	String nom;
 	String faction;
 	int pts_max;
+	int pts;
+	
+	private List<GroupeUnite> groupes = new ArrayList<>();
 	
 	static java.util.Scanner sc = new java.util.Scanner(System.in);
+	
 	
     public Armee(){
     	boolean name_enter = true;
@@ -67,6 +73,35 @@ public class Armee{
     
 	public String getNom() {
 		return this.nom;
+	}
+	
+	public void addGroupe(GroupeUnite groupe_a_ajouter) {
+		this.groupes.add(groupe_a_ajouter);
+	}
+	
+	public void print() {
+		System.out.println("\n  Armée : " + this.nom);
+		System.out.println("  Points max : " + this.pts_max);
+		System.out.println("  Points utilisés : " + this.pts);
+		
+		if(this.groupes.size() > 0) {
+			System.out.println("\n  Groupes : ");
+			
+			for (GroupeUnite groupe : groupes) {
+				System.out.println("  - "+ groupe.nom);
+				// Autre boucle sur les unités ensuite
+			}
+		
+		} else {
+			System.out.println(	"\n  Aucun groupe ajouté pour le moment.");
+		}
+
+		sc.nextLine();
+	}
+	
+	// TODO
+	private void updatePts() {
+		this.pts = 100;
 	}
 	
 }

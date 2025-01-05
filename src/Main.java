@@ -8,7 +8,7 @@ public class Main {
 	static java.util.Scanner sc = new java.util.Scanner(System.in);
     private static List<Armee> armees = new ArrayList<>();
     
-	static int menu_width = 120;
+	static int MENU_WIDTH = 80;
 	
 	/* J'ai chippé cette fonction sur Internet.
 	 * Elle fonctionne super bien sauf sur la console des IDE.
@@ -42,34 +42,41 @@ public class Main {
 		
 		switch(menu) {
 			case 0:{
-				fill = menu_width - 32;
+				fill = MENU_WIDTH - 32;
 				System.out.println("\n----- Éditeur de liste d'armée "+ createFiller(fill) +"\n");
 				break;
 			}
 			case 1:{
-				fill = menu_width - 53 - offset;
+				fill = MENU_WIDTH - 53 - offset;
 				System.out.println("\n----- Éditeur de liste d'armée --> Gérer l'armée \"" + text +"\" " +  createFiller(fill) +"\n");
 		        break;
 			}
 			case 2:{
-				fill = menu_width - 52;
+				fill = MENU_WIDTH - 52;
 				System.out.println("\n----- Éditeur de liste d'armée --> Créer une armée " + createFiller(fill) + "\n");
 				break;
 			}
 			case 3:{
-				fill = menu_width - 56;
+				fill = MENU_WIDTH - 56;
 				System.out.println("\n----- Éditeur de liste d'armée --> Supprimer une armée " + createFiller(fill) + "\n");
 				break;
+			}
+			case 4:{
+				fill = MENU_WIDTH - 53 - offset;
+				System.out.println("\n----- Éditeur de liste d'armée --> Gérer l'armée \"" + text + "\" --> Ajouter un groupe d'unité " + createFiller(fill) +"\n");
+		        break;
 			}
 		}
 	}
 
     public static void main(String[] args) {
         
-        // DEBUG ONLY : ENLEVER LES LIGNES SUIVANTES
+        // DEBUG ONLY SECTION
         armees.add(new Armee("François", "Space Marines", 45000));
         armees.add(new Armee("Louis", "Elfes Magiques", 12000));
-        
+        armees.get(0).addGroupe(new GroupeUnite("Escadron 44"));
+        armees.get(0).addGroupe(new GroupeUnite("Commandement 3"));
+        // END DEBUG SECTION
         
 
         // Appel initial du menu
@@ -147,20 +154,19 @@ public class Main {
                 sc.nextLine(); // Consommer la ligne restante	
                 switch(choix1) {
 	                case 1:{
-	                	// Ajouter des groupes d'unités
 	                	ajouterGroupesUnites(armees.get(choix - 2));
 	                	break;
 	                }
 	                case 2:{
-	                	// Afficher un récapitulatif
+	                	armees.get(choix - 2).print();
 	                	break;
 	                }
 	                case 3:{
-	                	// Supprimer une unité
+	                	supprimerUnite(armees.get(choix - 2));
 	                	break;
 	                }
 	                case 4:{
-	                	// Supprimer un groupe
+	                	supprimerGroupe(armees.get(choix - 2));
 	                	break;
 	                }
 	                case 5:{
@@ -210,9 +216,24 @@ public class Main {
         }
     }
     
+    // TODO
     public static void ajouterGroupesUnites(Armee armee) {
+    	sweetTitle(4, armee.getNom());
+    	
+    	GroupeUnite groupe_a_ajouter = new GroupeUnite();
+    	armee.addGroupe(groupe_a_ajouter);
+    	
+    }
+    
+    public static void supprimerUnite(Armee armee) {
     	System.out.println(armee.nom);
     	
     }
+    public static void supprimerGroupe(Armee armee) {
+    	System.out.println(armee.nom);
+    	
+    }
+
+
 }
 	
