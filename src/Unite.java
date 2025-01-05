@@ -1,5 +1,6 @@
-public class Unite{
-	// Infanterie ou Véhicules
-	String nom;
-	int cout;
+public abstract class Unite {
+    String nom;
+    int cout;
+
+    public abstract void print();
 }
