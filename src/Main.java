@@ -79,6 +79,7 @@ public class Main {
         }
     }
 
+    
     // MENU PRINCPAL --------------------------------------------------------------------
     
     // 1. Gérer une armée ---------------------------------------------------------------
@@ -92,7 +93,7 @@ public class Main {
 	        System.out.println("\t2 : Afficher un récapitulatif");
 	        System.out.println("\t3 : Supprimer une unité");
 	        System.out.println("\t4 : Supprimer un groupe");
-	        System.out.println("\t5 : Ajouter une unité à un groupe"); // Nouvelle option
+	        System.out.println("\t5 : Ajouter une unité à un groupe");
 	        System.out.println("\t6 : Retour");
 	
 	        System.out.print("\nChoix : ");
@@ -100,7 +101,7 @@ public class Main {
 	
 	        try {
 	            choix1 = sc.nextInt();
-	            sc.nextLine(); // Consommer la ligne restante
+	            sc.nextLine();
 	
 	            switch (choix1) {
 	                case 1: {
@@ -119,7 +120,7 @@ public class Main {
 	                    supprimerGroupe(armees.get(choix - 2));
 	                    break;
 	                }
-	                case 5: { // Appeler la méthode pour ajouter une unité
+	                case 5: {
 	                    ajouterUniteGroupe(armees.get(choix - 2));
 	                    break;
 	                }
@@ -142,8 +143,8 @@ public class Main {
         sweetTitle(4, armee.getNom());
 
         GroupeUnite groupe_a_ajouter = new GroupeUnite();
-        armee.addGroupe(groupe_a_ajouter); // L'ajout lie automatiquement le groupe à l'armée
-        armee.updatePts(); // Ajout explicite : recalcul des points après ajout
+        armee.addGroupe(groupe_a_ajouter);
+        armee.updatePts(); // Recalcul des points après ajout d'un nouveau groupe
     }
 
     public static void supprimerUnite(Armee armee) {
@@ -170,7 +171,7 @@ public class Main {
                     for (int i = 0; i < groupe.getUnites().size(); i++) {
                         System.out.println("\t" + i + " : " + groupe.getUnites().get(i).nom);
                     }
-                    System.out.println("\t" + groupe.getUnites().size() + " : Retour");
+                    System.out.println("\t" + groupe.getUnites().size() + " : Retour\n");
 
                     System.out.print("Choix de l'unité à supprimer : ");
                     int choixUnite = sc.nextInt();
@@ -179,12 +180,13 @@ public class Main {
                     groupe.supprimerUnite(choixUnite);
 
                 } catch (InputMismatchException | IndexOutOfBoundsException e) {
-                    System.out.println("Entrée invalide. Réessayez.");
+                    System.out.println("\nEntrée invalide. Réessayez.");
                     sc.nextLine();
                 }
             }
         } else {
             System.out.println("Aucun groupe à gérer.");
+            sc.nextLine();
         }
     }
 
@@ -215,6 +217,7 @@ public class Main {
             }
         } else {
             System.out.println("Aucun groupe à supprimer.");
+            sc.nextLine();
         }
     }
     
@@ -232,7 +235,7 @@ public class Main {
                 System.out.print("Choix : ");
                 try {
                     choixGroupe = sc.nextInt();
-                    sc.nextLine(); // Consommer la ligne restante
+                    sc.nextLine();
 
                     if (choixGroupe == armee.getGroupes().size()) return;
 
@@ -246,6 +249,7 @@ public class Main {
             }
         } else {
             System.out.println("Aucun groupe disponible pour ajouter une unité.");
+            sc.nextLine();
         }
     }
 
@@ -278,26 +282,18 @@ public class Main {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Entrée invalide. Veuillez entrer un nombre.");
-                    sc.next(); // Vider le buffer du scanner
+                    sc.next();
                 }
             }
         } else {
             System.out.println("Aucune armée à supprimer. Commencez par en créer une.");
-            sc.next();
-            sc.next();
+            sc.nextLine();
         }
     }
 
     // Afficher le menu principal de l'application
     public static void main(String[] args) {
-    	
-    	// DEBUG ONLY
-        armees.add(new Armee("François", "Space Marines", 45000));
-        armees.add(new Armee("Louis", "Elfes Magiques", 12000));
-        armees.get(0).addGroupe(new GroupeUnite("Escadron 44"));
-        armees.get(0).addGroupe(new GroupeUnite("Commandement 3"));
-        // /!\ TO REMOVE
-        
+ 
         while (true) {
             clearConsole();
             sweetTitle(0, null);
@@ -334,12 +330,10 @@ public class Main {
                 } else {
                     System.out.println("Choix invalide. Réessayez.");
                     sc.nextLine();
-                    sc.nextLine();
                 }
 
             } catch (InputMismatchException e) {
                 System.out.println("Choix invalide. Réessayez.");
-                sc.nextLine();
                 sc.nextLine();
             }
         }

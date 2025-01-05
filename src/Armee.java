@@ -130,7 +130,7 @@ public class Armee {
                 } else if (choix == 2) {
                     terminé = true;
                 } else {
-                    System.out.println("\\tChoix invalide. Réessayez.");
+                    System.out.println("\tChoix invalide. Réessayez.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\\tEntrée invalide. Veuillez entrer un nombre.");

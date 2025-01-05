@@ -44,18 +44,18 @@ public class GroupeUnite {
         boolean ajouté = false;
         while (!ajouté) {
             try {
-                System.out.println("\nEntrez le type d'unité (Infanterie ou Véhicule) : ");
+                System.out.println("\n\tEntrez le type d'unité (Infanterie ou Véhicule) : ");
                 String type = sc.nextLine().toLowerCase();
 
                 if ("infanterie".equals(type)) {
-                    System.out.println("Entrez le nom de l'infanterie : ");
+                    System.out.println("\tEntrez le nom de l'infanterie : ");
                     String nom = sc.nextLine();
 
-                    System.out.println("Entrez le coût en points : ");
+                    System.out.println("\tEntrez le coût en points : ");
                     int cout = sc.nextInt();
                     sc.nextLine(); // Consommer la ligne restante
 
-                    System.out.println("Entrez le type d'infanterie (SOLDAT, LOURD, SPECIAL, CHEF) : ");
+                    System.out.println("\tEntrez le type d'infanterie (SOLDAT, LOURD, SPECIAL, CHEF) : ");
                     String typeInf = sc.nextLine().toUpperCase();
                     TypeInfanterie typeInfanterie = TypeInfanterie.valueOf(typeInf);
 
@@ -63,20 +63,20 @@ public class GroupeUnite {
                     addUnite(infanterie);
                     ajouté = true;
 
-                } else if ("vehicule".equals(type)) {
-                    System.out.println("Entrez le nom du véhicule : ");
+                } else if ("véhicule".equals(type) || "vehicule".equals(type)) {
+                    System.out.println("\tEntrez le nom du véhicule : ");
                     String nom = sc.nextLine();
 
-                    System.out.println("Entrez le coût en points : ");
+                    System.out.println("\tEntrez le coût en points : ");
                     int cout = sc.nextInt();
                     sc.nextLine(); // Consommer la ligne restante
 
-                    System.out.println("Entrez le type de véhicule (Transport ou Attaque) : ");
+                    System.out.println("\tEntrez le type de véhicule (Transport ou Attaque) : ");
                     String typeVeh = sc.nextLine();
 
                     int capacite = 0;
                     if ("Transport".equalsIgnoreCase(typeVeh)) {
-                        System.out.println("Entrez la capacité de transport : ");
+                        System.out.println("\tEntrez la capacité de transport : ");
                         capacite = sc.nextInt();
                         sc.nextLine();
                     }
@@ -86,12 +86,12 @@ public class GroupeUnite {
                     ajouté = true;
 
                 } else {
-                    System.out.println("Type d'unité invalide. Réessayez.");
+                    System.out.println("\tType d'unité invalide. Réessayez.");
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Erreur : " + e.getMessage() + ". Réessayez.");
+                System.out.println("\tErreur : " + e.getMessage() + ". Réessayez.");
             } catch (InputMismatchException e) {
-                System.out.println("Erreur : Veuillez entrer des valeurs valides.");
+                System.out.println("\tErreur : Veuillez entrer des valeurs valides.");
                 sc.nextLine();
             }
         }
@@ -117,8 +117,8 @@ public class GroupeUnite {
 	 
 	public void addUnite(Unite unite) {
 	    if (armeeParente != null && armeeParente.pts + unite.cout > armeeParente.pts_max) {
-	        System.out.println("Erreur : L'ajout de cette unité dépasse le nombre maximal de points de l'armée.");
-	        return; // Arrête l'ajout
+	        System.out.println("\tErreur : L'ajout de cette unité dépasse le nombre maximal de points de l'armée.");
+	        return;
 	    }
 
 	    this.unites.add(unite);
@@ -137,23 +137,22 @@ public class GroupeUnite {
 	    if (index >= 0 && index < unites.size()) {
 	        Unite uniteSupprimee = unites.get(index);
 	        unites.remove(index);
-	        System.out.println("Unité " + uniteSupprimee.nom + " supprimée avec succès.");
+	        System.out.println("\tUnité " + uniteSupprimee.nom + " supprimée avec succès.");
 	        updateTotalPoints();
 	        notifyArmeeParent();
 	    } else {
-	        System.out.println("Erreur : Index invalide. Aucune unité supprimée.");
+	        System.out.println("\tErreur : Index invalide. Aucune unité supprimée.");
 	    }
 	}
 
 	public void supprimerUnite(Unite unite) {
 	    if (unites.remove(unite)) {
-	        System.out.println("Unité " + unite.nom + " supprimée avec succès.");
+	        System.out.println("\tUnité " + unite.nom + " supprimée avec succès.");
 	        updateTotalPoints();
 	        notifyArmeeParent();
 	    } else {
-	        System.out.println("Erreur : Unité non trouvée.");
+	        System.out.println("\tErreur : Unité non trouvée.");
 	    }
 	}
-
-
+	
 }

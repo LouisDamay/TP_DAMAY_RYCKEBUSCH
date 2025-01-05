@@ -7,7 +7,6 @@ public class Infanterie extends Unite {
         this.type = type;
     }
 
-    @Override
     public void print() {
         System.out.println("\tInfanterie : " + type + " - " + nom + " (" + cout + " pts)");
     }

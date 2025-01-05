@@ -9,7 +9,6 @@ public class Vehicule extends Unite {
         this.capacite = capacite;
     }
 
-    @Override
     public void print() {
         if ("Transport".equalsIgnoreCase(type)) {
             System.out.println("\tVéhicule : " + type + " - " + nom + " (" + cout + " pts, capacité : " + capacite + ")");
